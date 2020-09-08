@@ -117,24 +117,63 @@ class SinglyLinkedList {
     }
     return false;
   }
+  includes(value) {
+    for (let i = 0; i < this.length; i++) {
+      if (this.get(i).value === value) {
+        return true;
+      }
+    }
+    return false;
+  }
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let previous = null;
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = previous;
+      previous = node;
+      node = next;
+    }
+    return this;
+  }
+  frequency() {
+    if (this.length === 0) return undefined;
+    let returnObj = {};
+    for (let i = 0; i < this.length; i++) {
+      returnObj[this.get(i).value] = (returnObj[this.get(i).value] || 0) + 1;
+    }
+    return returnObj;
+  }
+  toString() {
+    let returnArray = [];
+    for (let i = 0; i < this.length; i++) {
+      if (typeof this.get(i).value === "string") {
+        returnArray.push(this.get(i).value);
+      } else {
+        returnArray.push(this.get(i).value.toString());
+      }
+    }
+    return returnArray;
+  }
+  mostFreq() {
+    let returnObj = this.frequency();
+    let sortArray = [];
+    for (const [key, value] of Object.entries(returnObj)) {
+      sortArray.push([key, value]);
+    }
+    let newSortArray = sortArray.sort((element, index) => {
+      return element[1] - index[1];
+    });
+    let length = newSortArray.length;
+    if (newSortArray[length - 1][1] === newSortArray[length - 2][1]) {
+      console.log("Two Or More Elements With Same Frequency");
+    } else {
+      return newSortArray[length - 1][0];
+    }
+  }
 }
 
 let list = new SinglyLinkedList();
-console.log(list.push(1));
-console.log(list.push(2));
-console.log(list.push(3));
-console.log(list.push(5));
-console.log(list.push(6));
-console.log(list.push(7));
-// console.log(list.unshift(0));
-// console.log(list.shift());
-// console.log(list.shift());
-// console.log(list.shift());
-// console.log(list.shift());
-// console.log(list.get(3));
-// console.log(list.print());
-// console.log(list.set(2, 55555));
-// console.log(list.insert(3, 4));
-// console.log(list.remove(4));
-// console.log(list.print());
-console.log(list.indexOf(7));
