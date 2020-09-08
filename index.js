@@ -109,6 +109,14 @@ class SinglyLinkedList {
     this.length--;
     return deleteNode;
   }
+  indexOf(value) {
+    let counter = 0;
+    for (let i = 0; i < this.length; i++) {
+      if (this.get(i).value === value) return counter;
+      else counter++;
+    }
+    return false;
+  }
 }
 
 let list = new SinglyLinkedList();
@@ -126,6 +134,7 @@ console.log(list.push(7));
 // console.log(list.get(3));
 // console.log(list.print());
 // console.log(list.set(2, 55555));
-console.log(list.insert(3, 4));
-console.log(list.remove(4));
-console.log(list.print());
+// console.log(list.insert(3, 4));
+// console.log(list.remove(4));
+// console.log(list.print());
+console.log(list.indexOf(7));
