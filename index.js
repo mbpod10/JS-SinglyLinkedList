@@ -169,10 +169,45 @@ class SinglyLinkedList {
     });
     let length = newSortArray.length;
     if (newSortArray[length - 1][1] === newSortArray[length - 2][1]) {
-      console.log("Two Or More Elements With Same Frequency");
+      return "Two Or More Elements With Same Frequency";
     } else {
       return newSortArray[length - 1][0];
     }
+  }
+  switch(index1, index2) {
+    let node1 = this.get(index1);
+    let node1Prev = this.get(index1 - 1);
+    let node1Next = this.get(index1 + 1);
+
+    let node2 = this.get(index2);
+    let node2Prev = this.get(index2 - 1);
+    let node2Next = this.get(index2 + 1);
+
+    node2Prev.next = node1;
+    node1.next = node2Next;
+
+    node1Prev.next = node2;
+    node2.next = node1Next;
+    return this;
+  }
+  count(value) {
+    let counter = 0;
+    for (let i = 0; i < this.length; i++) {
+      if (this.get(i).value === value) {
+        counter++;
+      }
+    }
+    if (counter > 0) return counter;
+    return false;
+  }
+  tailToHead() {
+    let newTail = this.get(this.length - 2);
+    let newHead = this.get(this.length - 1);
+    newHead.next = this.head;
+    this.head = newHead;
+    newTail.next = null;
+    this.tail = newTail;
+    return this;
   }
 }
 
